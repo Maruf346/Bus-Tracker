@@ -6,9 +6,9 @@ import api from '../api.js'
 
 export default function DriverLogin() {
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [email,   setEmail]   = useState('')
+  const [password,setPassword]= useState('')
+  const [error,   setError]   = useState('')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -23,9 +23,9 @@ export default function DriverLogin() {
     setLoading(true)
     try {
       const { data } = await api.post('/auth/driver-login/', { email, password })
-      localStorage.setItem('driverToken', data.token)
-      localStorage.setItem('driverName', data.driver_name)
-      localStorage.setItem('driverBus', JSON.stringify(data.bus))
+      localStorage.setItem('driverToken',  data.token)
+      localStorage.setItem('driverName',   data.driver_name)
+      localStorage.setItem('driverBus',    JSON.stringify(data.bus))
       navigate('/driver-dashboard', { replace: true })
     } catch (err) {
       setError(err.response?.data?.error ?? 'Login failed. Please try again.')
@@ -35,65 +35,64 @@ export default function DriverLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-sm">
 
         {/* Logo */}
         <motion.div
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
           className="text-center mb-8"
         >
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-2xl shadow-lg shadow-blue-500/40 mb-4">
-            <Bus className="w-10 h-10 text-white" />
+          <div className="w-14 h-14 bg-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-violet-200">
+            <Bus className="w-7 h-7 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Bus Tracker</h1>
-          <p className="text-blue-300 mt-1 text-sm">Smart University Bus System</p>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Driver Portal</h1>
+          <p className="text-gray-400 text-sm mt-1">Sign in to manage your route</p>
         </motion.div>
 
         {/* Card */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-          className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/15"
+          transition={{ duration: 0.35, delay: 0.1, ease: 'easeOut' }}
+          className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7"
         >
-          <h2 className="text-xl font-semibold text-white mb-6">Driver Sign In</h2>
-
           <form onSubmit={handleSubmit} className="space-y-5">
+
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-blue-200 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
                 Email address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-300/70" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={e => setEmail(e.target.value)}
                   required
                   placeholder="driver@example.com"
-                  className="w-full pl-10 pr-4 py-3 bg-white/8 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/70 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:border-violet-400 transition-all"
                 />
               </div>
             </div>
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-blue-200 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-300/70" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={e => setPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-3 bg-white/8 border border-white/15 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400/70 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/30 focus:border-violet-400 transition-all"
                 />
               </div>
             </div>
@@ -102,11 +101,11 @@ export default function DriverLogin() {
             <AnimatePresence>
               {error && (
                 <motion.div
-                  initial={{ opacity: 0, y: -8 }}
+                  initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25 }}
-                  className="flex items-center gap-2.5 bg-red-500/15 border border-red-400/25 text-red-300 rounded-xl px-4 py-3 text-sm"
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex items-center gap-2.5 bg-rose-50 border border-rose-100 text-rose-600 rounded-xl px-4 py-3 text-sm"
                 >
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   {error}
@@ -118,8 +117,8 @@ export default function DriverLogin() {
             <motion.button
               type="submit"
               disabled={loading}
-              whileTap={{ scale: 0.97 }}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-800/60 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors duration-200 shadow-lg shadow-blue-500/25 mt-2"
+              whileTap={{ scale: 0.98 }}
+              className="w-full py-2.5 bg-violet-600 hover:bg-violet-700 disabled:bg-violet-300 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-colors duration-150 shadow-sm"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -127,15 +126,15 @@ export default function DriverLogin() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                   </svg>
-                  Signing in...
+                  Signing in…
                 </span>
               ) : 'Sign In'}
             </motion.button>
           </form>
         </motion.div>
 
-        <p className="text-center text-slate-600 text-xs mt-6">
-          Admin? Visit <span className="text-slate-500">/admin</span>
+        <p className="text-center text-gray-400 text-xs mt-5">
+          Admin panel at <span className="text-gray-500 font-medium">/admin</span>
         </p>
       </div>
     </div>
