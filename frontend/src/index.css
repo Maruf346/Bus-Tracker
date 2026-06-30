@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* Leaflet marker icon fix for bundlers */
+@import "leaflet/dist/leaflet.css";
